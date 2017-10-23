@@ -26,6 +26,7 @@ import json
 import os.path
 import random
 import sys
+import os
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -34,17 +35,19 @@ import jieba
 import numpy as np
 import tensorflow as tf
 
-tf.flags.DEFINE_string("image_dir", "/home/store-1-img/wenjia/challenger_dataset/caption/ai_challenger_caption_train_20170902/caption_train_images_20170902/",
+basedir = os.environ['ML_DATA']
+
+tf.flags.DEFINE_string("image_dir", basedir+"/challenge/train/images_org",
                        "image directory.")
 tf.flags.DEFINE_string("captions_file",
-                       "/home/store-1-img/wenjia/challenger_dataset/caption/ai_challenger_caption_train_20170902/caption_train_annotations_20170902.json",
+                       basedir+"/challenge/train/caption.json",
                        "captions json file.")
 
 tf.flags.DEFINE_string("output_dir",
-                       "/home/store-1-img/zhenghe/ai_challenger_caption_train_output/TFRECORD_data",
+                       basedir+"/challenge/train/output/TFRECORD_data",
                        "Output data directory.")
 
-tf.flags.DEFINE_integer("train_shards", 280,
+tf.flags.DEFINE_integer("train_shards", 160,
                         "Number of shards in training TFRecord files.")
 tf.flags.DEFINE_integer("val_shards", 4,
                         "Number of shards in validation TFRecord files.")
@@ -61,10 +64,10 @@ tf.flags.DEFINE_integer("min_word_count", 4,
                         "The minimum number of occurrences of each word in the "
                         "training set for inclusion in the vocabulary.")
 tf.flags.DEFINE_string("word_counts_output_file",
-                       "/home/store-1-img/zhenghe/ai_challenger_caption_train_output/word_counts.txt",
+                       basedir+"/challenge/train/output/word_counts.txt",
                        "Output vocabulary file of word counts.")
 
-tf.flags.DEFINE_integer("num_threads", 56,
+tf.flags.DEFINE_integer("num_threads", 32,
                         "Number of threads to preprocess the images.")
 
 FLAGS = tf.flags.FLAGS
