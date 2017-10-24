@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CHECKPOINT_PATH="$ML_DATA/challenge/train/output/model/train/model.ckpt-500"
+CHECKPOINT_PATH="$ML_DATA/challenge/train/output/model/train/model.ckpt-$1"
 VOCAB_FILE="$ML_DATA/challenge/train/output/word_counts.txt"
 export CUDA_VISIBLE_DEVICES="0"
 IMAGE_DIR="$ML_DATA/challenge/val/images_org/"
